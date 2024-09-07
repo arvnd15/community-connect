@@ -1,0 +1,95 @@
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #fdfffc;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Subtle shadow for better contrast */
+    letter-spacing: 1px; /* Slightly increase the space between letters */
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+.filter-section {
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.filter-section input[type="text"], .filter-section input[type="date"], .filter-section select {
+    width: 150px;
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.filter-section button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.applyFilters button {
+    background-color: #4CAF50;
+}
+
+.clearFilters button {
+    background-color: #f44336;
+}
+
+.applyFilters button:hover {
+    background-color: #45a049;
+}
+
+.clearFilters button:hover{
+    background-color: #e53935;
+}
+.placeholder-wrapper {
+    display: flex;
+    width: 150px;
+    border-radius: 4px;
+}

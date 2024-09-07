@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login-style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <img src="../images/logo.jpg" alt="logo">
+                <h2>Community Connect</h2>
+            </a>
+        </nav>
+    </header>
+    <div class="form-container">
+        <div class="form-box login">
+            <div class="form-details">
+                <h2>Welcome Back</h2>
+                <p>Please log in using your personal information to stay connected with us.</p>
+            </div>
+            <div class="form-content">
+                <h2>LOGIN</h2>
+
+                <!-- Display error message if it exists -->
+                <% if (error) { %>
+                    <p style="color: red;"><%= error %></p>
+                <% } %>
+
+                <form action="/login" method="post">
+                    <div class="input-field">
+                        <input type="email" name="email" placeholder=" " required>
+                        <label>Email</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="password" placeholder=" " required>
+                        <label>Password</label>
+                    </div>
+                    <button type="submit">Log In</button>
+                </form>
+                <div class="bottom-link">
+                    Don't have an account?
+                    <a href="/signup" id="signup-link">Signup</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Community Connect. All rights reserved.</p>
+    </footer>
+</body>
+</html>

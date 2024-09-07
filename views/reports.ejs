@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <!-- Google Fonts Link For Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reports-style.css">
+    <script src="script.js" defer></script>
+    <link rel="icon" href="images/logo.jpg">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <span class="hamburger-btn material-symbols-rounded">menu</span>
+            <a href="#" class="logo">
+                <img src="images/logo.jpg" alt="logo">
+                <h2>Community Connect</h2>
+            </a>
+            <ul class="links">
+                <span class="close-btn material-symbols-rounded">close</span>
+                <li><a href="/">Home</a></li>
+                <li><a href="/events">Upcoming Events</a></li>
+                <li><a href="/#contact-us">Contact us</a></li>
+                <li><a href="/reports">Reports</a></li>
+                <li><a href="/requests">Requests</a></li>
+            </ul>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </nav>
+    </header>
+    <h1>Event Reports</h1>
+
+    <div class="filter-section">
+        <input type="text" id="filterEventName" placeholder="Filter by Event Name">
+        <div class="placeholder-wrapper">
+            <input type="text" id="filterStartDate" class="date-input" placeholder="Start Date">
+            <span class="date-placeholder"></span>
+        </div>
+        <div class="placeholder-wrapper">
+            <input type="text" id="filterEndDate" class="date-input" placeholder="End Date">
+            <span class="date-placeholder"></span>
+        </div>
+        <input type="text" id="filterLocation" placeholder="Filter by Location">
+        <input type="text" id="filterStatus" placeholder="Filter by Status">
+    </div>
+    <div class="filter-buttons">
+        <button id="applyFilters">Apply Filters</button>
+        <button id="clearFilters">Clear Filters</button>
+    </div>
+
+    <div id="eventReport" class="report-section">
+        <% if (reports.length > 0) { %>
+            <button id="downloadbtn" onclick="window.location.href='/download-report'">Download Report</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Event Date</th>
+                        <th>Location</th>
+                        <th>Time</th>
+                        <th>Volunteers Registered</th>
+                        <th>Seats Left</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="reportTableBody">
+                    <% reports.forEach(report => { %>
+                        <tr>
+                            <td><%= report.eventName %></td>
+                            <td><%= report.eventDate %></td>
+                            <td><%= report.location %></td>
+                            <td><%= report.time %></td>
+                            <td><%= report.volunteers %></td>
+                            <td><%= report.seatsLeft %></td>
+                            <td><%= report.status %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No reports available.</p>
+        <% } %>
+    </div>    
+    
+    <footer>
+        <p>&copy; 2024 Community Connect. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showReport(reportId) {
+            // Hide all report sections
+            document.querySelectorAll('.report-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            // Show the selected report section
+            document.getElementById(reportId).style.display = 'block';
+        }
+
+        // Optionally show the first report section by default
+        document.addEventListener('DOMContentLoaded', () => {
+            showReport('eventReport');
+        });
+
+         // Attach date picker to the text inputs (e.g., using jQuery UI Datepicker, or a similar library)
+         const dateInputs = document.querySelectorAll('.date-input');
+        
+        dateInputs.forEach(input => {
+            // Use a date picker library here if desired, or simply let users type the date
+            input.addEventListener('focus', function () {
+                this.type = 'date';
+            });
+
+            input.addEventListener('blur', function () {
+                if (!this.value) {
+                    this.type = 'text';
+                }
+            });
+
+            input.addEventListener('input', function () {
+                this.nextElementSibling.style.display = this.value ? 'none' : 'block';
+            });
+
+            if (input.value) {
+                input.nextElementSibling.style.display = 'none';
+            }
+        });
+
+        document.getElementById('applyFilters').addEventListener('click', () => {
+    const filters = {
+        eventName: document.getElementById('filterEventName').value.toLowerCase(),
+        startDate: document.getElementById('filterStartDate').value,
+        endDate: document.getElementById('filterEndDate').value,
+        location: document.getElementById('filterLocation').value.toLowerCase(),
+        status: document.getElementById('filterStatus').value.toLowerCase()
+    };
+
+    document.querySelectorAll('#reportTableBody tr').forEach(row => {
+        const cells = row.getElementsByTagName('td');
+        const eventDate = new Date(cells[1].textContent); // Assuming eventDate is in the second column (index 1)
+        const startDate = filters.startDate ? new Date(filters.startDate) : null;
+        const endDate = filters.endDate ? new Date(filters.endDate) : null;
+        
+        // Check date range match
+        const dateMatches = (!startDate || eventDate >= startDate) && (!endDate || eventDate <= endDate);
+        
+        // Status filter should check the status column (adjust index to your table structure)
+        const statusMatches = !filters.status || cells[6].textContent.toLowerCase().includes(filters.status);
+
+        // Apply the filter logic
+        const matches = 
+            (!filters.eventName || cells[0].textContent.toLowerCase().includes(filters.eventName)) && // Event Name filter (index 0)
+            dateMatches && // Date range filter
+            (!filters.location || cells[2].textContent.toLowerCase().includes(filters.location)) && // Location filter (index 2)
+            statusMatches; // Status filter (index 6)
+
+        row.style.display = matches ? '' : 'none';
+    });
+});
+
+document.getElementById('clearFilters').addEventListener('click', () => {
+    document.querySelectorAll('.filter-section input[type="text"], .filter-section input[type="date"]').forEach(input => input.value = '');
+    document.querySelectorAll('#reportTableBody tr').forEach(row => row.style.display = '');
+});
+
+    </script>        
+</body>
+</html>

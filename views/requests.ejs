@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration Requests</title>
+    <!-- Google Fonts Link For Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="req-style.css">
+    <script src="script.js" defer></script>
+    <link rel="icon" href="images/logo.jpg">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <span class="hamburger-btn material-symbols-rounded">menu</span>
+            <a href="#" class="logo">
+                <img src="images/logo.jpg" alt="logo">
+                <h2>Community Connect</h2>
+            </a>
+            <ul class="links">
+                <span class="close-btn material-symbols-rounded">close</span>
+                <li><a href="/">Home</a></li>
+                <li><a href="/events">Upcoming Events</a></li>
+                <li><a href="/#contact-us">Contact us</a></li>
+                <li><a href="/reports">Reports</a></li>
+                <li><a href="/requests">Requests</a></li>
+            </ul>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </nav>
+    </header>
+    <h1>Pending Event Registration Requests</h1>
+    <main>
+
+        <div class="filter-section">
+            <input type="text" id="filterUserEmail" placeholder="Filter by User Email">
+            <input type="text" id="filterEventName" placeholder="Filter by Event Name">
+            
+            <!-- Date Range Filter -->
+            <div class="placeholder-wrapper">
+                <input type="text" id="filterStartDate" class="date-input" placeholder="Start Date">
+                <span class="date-placeholder"></span>
+            </div>
+            <div class="placeholder-wrapper">
+                <input type="text" id="filterEndDate" class="date-input" placeholder="End Date">
+                <span class="date-placeholder"></span>
+            </div>
+    
+            <!-- Dropdown for Date Type -->
+            <select id="dateType">
+                <option value="eventDate">Event Date</option>
+                <option value="registrationDate">Registration Date</option>
+            </select>
+            <div class="applyFilters">
+            <button id="applyFilters">Apply Filters</button>    </div>
+            <div class="clearFilters">
+            <button id="clearFilters">Clear Filters</button>    </div>
+        </div>
+
+    <% if (requests.length === 0) { %>
+        <p>No pending requests.</p>
+    <% } else { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>User Email</th>
+                    <th>Event Name</th>
+                    <th>Event Date</th>
+                    <th>Registration Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="requestTableBody">
+                <% requests.forEach(request => { %>
+                    <tr>
+                        <td><%= request.userEmail %></td>
+                        <td><%= request.eventName %></td>
+                        <td><%= request.eventDate %></td>
+                        <td><%= request.registrationDate %></td>
+                        <td>
+                            <form action="/approve-request" method="post" style="display:inline;">
+                                <input type="hidden" name="requestId" value="<%= request._id %>">
+                                <button type="submit">Approve</button>
+                            </form>
+                            <form action="/reject-request" method="post" style="display:inline;">
+                                <input type="hidden" name="requestId" value="<%= request._id %>">
+                                <button type="submit">Reject</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</main>
+</body>
+<footer>
+    <p>&copy; 2024 Community Connect. All rights reserved.</p>
+</footer>
+    <script>
+         // Attach date picker to the text inputs (e.g., using jQuery UI Datepicker, or a similar library)
+         const dateInputs = document.querySelectorAll('.date-input');
+        
+        dateInputs.forEach(input => {
+            // Use a date picker library here if desired, or simply let users type the date
+            input.addEventListener('focus', function () {
+                this.type = 'date';
+            });
+
+            input.addEventListener('blur', function () {
+                if (!this.value) {
+                    this.type = 'text';
+                }
+            });
+
+            input.addEventListener('input', function () {
+                this.nextElementSibling.style.display = this.value ? 'none' : 'block';
+            });
+
+            if (input.value) {
+                input.nextElementSibling.style.display = 'none';
+            }
+        });
+
+
+        document.getElementById('applyFilters').addEventListener('click', () => {
+    const filters = {
+        userEmail: document.getElementById('filterUserEmail').value.toLowerCase(),
+        eventName: document.getElementById('filterEventName').value.toLowerCase(),
+        startDate: document.getElementById('filterStartDate').value,
+        endDate: document.getElementById('filterEndDate').value,
+        dateType: document.getElementById('dateType').value
+    };
+
+    document.querySelectorAll('#requestTableBody tr').forEach(row => {
+        const cells = row.getElementsByTagName('td');
+        const dateCellIndex = filters.dateType === 'eventDate' ? 2 : 3;
+        const dateValue = new Date(cells[dateCellIndex].textContent);
+        const startDate = filters.startDate ? new Date(filters.startDate) : null;
+        const endDate = filters.endDate ? new Date(filters.endDate) : null;
+
+        const dateMatches = (!startDate || dateValue >= startDate) && (!endDate || dateValue <= endDate);
+        const matches = Object.keys(filters).every((key, index) => 
+            (key === 'startDate' || key === 'endDate' || key === 'dateType') ? dateMatches : 
+            !filters[key] || (cells[index] && cells[index].textContent.toLowerCase().includes(filters[key]))
+        );
+
+        row.style.display = matches ? '' : 'none';
+    });
+});
+
+document.getElementById('clearFilters').addEventListener('click', () => {
+    document.querySelectorAll('.filter-section input[type="text"], .filter-section input[type="date"]').forEach(input => input.value = '');
+    document.querySelectorAll('#requestTableBody tr').forEach(row => row.style.display = '');
+});
+
+    </script>
+
+</body>
+</html>
+

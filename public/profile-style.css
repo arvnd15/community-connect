@@ -1,0 +1,58 @@
+         .title h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #2ec4b6;
+            font-size: 3rem;
+            font-weight: 800;
+            text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Subtle shadow for better contrast */
+            letter-spacing: 1px; /* Slightly increase the space between letters */
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        input[readonly] {
+            background-color: #f0f0f0;
+            color: #666;
+            cursor: not-allowed;
+        }
+        button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .alert {
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }

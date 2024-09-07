@@ -1,0 +1,106 @@
+    .filter-section {
+		margin: 20px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: center;
+	}
+
+	.filter-section input[type="text"], .filter-section input[type="date"] {
+		width: 150px;
+		padding: 8px;
+		margin: 5px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+	}
+	
+	.filter-section input[id="filterVolunteers"] {
+		width: 250px;
+		padding: 8px;
+		margin: 5px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+	}
+	
+	.filter-buttons {
+		display: flex;
+		gap: 10px;
+		justify-content: center;
+	}
+	
+	.filter-buttons button {
+		padding: 10px 15px;
+		margin: 5px;
+		border: none;
+		border-radius: 4px;
+		background-color: #4CAF50;
+		color: white;
+		cursor: pointer;
+		font-size: 16px;
+	}
+	
+	.filter-buttons button#applyFilters {
+		background-color: #4CAF50;
+	}
+	
+	.filter-buttons button#applyFilters:hover {
+		background-color: #45a049;
+	}
+	
+	.filter-buttons button#clearFilters {
+		background-color: #f44336;
+	}
+	
+	.filter-buttons button#clearFilters:hover {
+		background-color: #e53935;
+	}
+
+	.report-section button {
+		padding: 5px 5px;
+		margin: 5px;
+		border: none;
+		border-radius: 4px;
+		background-color: #4CAF50;
+		color: white;
+		cursor: pointer;
+		font-size: 15px;
+		float: right;
+	}	
+	
+	.report-section button:hover {
+		background-color: #45a049;
+	}
+
+
+    h1 {
+        text-align: center;
+        margin: 20px 0;
+        color: #fdfffc;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Subtle shadow for better contrast */
+        letter-spacing: 1px; /* Slightly increase the space between letters */
+    }
+
+    main {
+        padding: 20px;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #333;
+        color: #fff;
+    }

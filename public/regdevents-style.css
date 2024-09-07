@@ -1,0 +1,103 @@
+        .registered-events table {
+            width: 100%;
+            border-collapse: collapse;
+            position: relative;
+            top: 3px;
+            left: 20px;
+            max-width: 95%;
+        }
+        
+        .registered-events th, .registered-events td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .registered-events th {
+            background-color: #333;
+            color: white;
+        }
+        
+        .registered-events tr {
+            background-color: #f2f2f2;
+        }
+        
+        .registered-events tr:hover {
+            background-color: #ddd;
+        }
+        
+        .registered-events p {
+            font-size: 1.2em;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .filter-section {
+            margin: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .filter-section input[type="text"], .filter-section input[type="date"] {
+            width: 150px;
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .filter-section button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .filter-section button:hover {
+            background-color: #45a049;
+        }
+
+        .filter-section button#clearFilters {
+            background-color: #f44336;
+        }
+
+        .filter-section button#clearFilters:hover {
+            background-color: #e53935;
+        }      
+        
+        .placeholder-wrapper {
+            position: relative;
+            display: flex;
+            width: 150px;
+            border-radius: 4px;
+        }
+        
+        .date-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #999;
+            pointer-events: none;
+            transition: all 0.2s ease;            
+        }
+
+
+        input[type="text"].date-input {
+            padding: 8px;
+            width: 150px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        input[type="text"].date-input:not(:placeholder-shown) + .date-placeholder {
+            display: none;
+        }

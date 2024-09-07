@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Events - Community Connect</title>
+    <!-- Google Fonts Link For Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="events-style.css">
+    <script src="script.js" defer></script>
+    <link rel="icon" href="images/logo.jpg">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <span class="hamburger-btn material-symbols-rounded">menu</span>
+            <a href="#" class="logo">
+                <img src="images/logo.jpg" alt="logo">
+                <h2>Community Connect</h2>
+            </a>
+            <ul class="links">
+                <span class="close-btn material-symbols-rounded">close</span>
+                <li><a href="/">Home</a></li>
+                <li><a href="/events">Upcoming Events</a></li>
+                <li><a href="/#about-us">About us</a></li>
+                <li><a href="/#contact-us">Contact us</a></li>
+                <li><a href="/profile">My Profile</a></li>
+            </ul>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <div class="events">
+            <button class="regd-event-btn" onclick="window.location.href='/registered-events'">Registered Events</button>
+            <br><br>
+            
+            <!-- Search Form -->
+            <div class="search-container">
+                <form id="searchForm" action="/events" method="get">
+                    <input type="text" name="search" placeholder="Search for Events" value="<%= searchQuery %>">
+                    <button type="submit">Search</button>
+                    <button type="button" id="clearSearch">Clear</button> <!-- Clear Button -->
+                </form>
+            </div>            
+            
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="error-message">
+                    <p><%= error %></p>
+                </div>
+            <% } %>
+            
+            <% if (typeof success !== 'undefined' && success) { %>
+                <div class="success-message">
+                    <p><%= success %></p>
+                </div>
+            <% } %>
+
+            <% if (events.length > 0) { %>
+                <% events.forEach(event => { %>
+                    <form action="/register-event" method="POST" class="event" name="eventregister">
+                        <div class="date">
+                            <span class="day"><%= new Date(event.eventDate).getDate() %></span>
+                            <span class="month"><%= new Date(event.eventDate).toLocaleString('default', { month: 'short' }) %></span>
+                        </div>
+                        <div class="details">
+                            <h2><%= event.eventName %></h2>
+                            <ul>
+                                <li class="event-details">
+                                    <span>Location: <%= event.location %></span>
+                                    <span>Time: <%= event.time %></span>
+                                </li>
+                                <li>No. of Volunteers required: <%= event.volunteers %></li>
+                                <li><%= event.description %></li>
+                            </ul>
+                        </div>
+                        <input type="hidden" name="event_id" value="<%= event._id %>">
+                        <div class="sub-btn"><button type="submit">Register</button></div>
+                    </form>
+                <% }); %>
+            <% } else { %>
+                <p>No events found.</p>
+            <% } %>
+        </div>     
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Community Connect. All rights reserved.</p>
+    </footer>
+
+    <script>
+         document.getElementById('clearSearch').addEventListener('click', function() {
+            document.querySelector('#searchForm input[name="search"]').value = '';
+            document.getElementById('searchForm').submit();
+        });
+    </script>
+</body>
+</html>

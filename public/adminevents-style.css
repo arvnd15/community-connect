@@ -1,0 +1,147 @@
+		#addEventForm {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        #addEventForm form div {
+            margin-bottom: 15px;
+        }
+
+        #addEventForm label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        #addEventForm input[type="text"],
+        #addEventForm input[type="date"],
+        #addEventForm textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #addEventForm button {
+            background-color: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #addEventForm button:hover {
+            background-color: #2ecc71;
+        }
+
+        /* Edit Event Form Styles */
+        #editEventForm {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: auto; /* Enable scrolling */
+            display: none; /* Initially hidden */
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            max-height: 80vh; /* Adjust this value as needed */
+            width: 300px; /* Set a fixed width for better control */
+        }
+
+        #editEventForm form div {
+            margin-bottom: 15px;
+        }
+
+        #editEventForm label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        #editEventForm input[type="text"],
+        #editEventForm input[type="date"],
+        #editEventForm textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #editEventForm button {
+            background-color: #2980b9;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #editEventForm button:hover {
+            background-color: #3498db;
+        }
+
+        .delete-button {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 80px;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px; /* Adjust gap as needed */
+        }
+        .search-container {
+			margin-bottom: 20px;
+					text-align: right; /* Align the search bar to the left */
+		}
+
+		.search-container input[type="text"] {
+			padding: 8px;
+			font-size: 16px;
+			border-radius: 4px;
+			border: 1px solid #ddd;
+			margin-right: 10px;
+		}
+
+		.search-container button {
+			padding: 8px 15px;
+			font-size: 16px;
+			background-color: #3498db;
+			color: #fff;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			margin-right: 5px; /* Add spacing between buttons */
+		}
+		
+		.search-container button:hover {
+			background-color: #2980b9;
+		}
+		
+		.search-container button#clearSearch {
+			background-color: #e74c3c;
+		}
+		
+		.search-container button#clearSearch:hover {
+			background-color: #c0392b;
+		}        
