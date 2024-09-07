@@ -1,2 +1,2 @@
 # community-connect
-Creating a website using AWS free-tier services for a local NGO to help in volunteer matching
+Creating a website using MERN Stack and AWS free-tier services for a local NGO to help in volunteer matching
